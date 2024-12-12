@@ -1,0 +1,32 @@
+{
+    "name": "mqtt-proxy-server",
+    "version": "1.0.0",
+    "description": "一个简单的MQTT代理服务器，用于处理订阅并将消息转发到HTTP客户端。",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "dependencies": {
+        "express": "^4.17.1",
+        "mqtt": "^4.2.8"
+    },
+    "engines": {
+        "node": ">=14.17.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Fano-O/mqtt-proxy-server.git"
+    },
+    "keywords": [
+        "MQTT",
+        "Proxy",
+        "HTTP",
+        "Server"
+    ],
+    "author": "Fan",
+    "license": "Apache-2.0",
+    "bugs": {
+        "url": "https://github.com/Fano-O/mqtt-proxy-server/issues"
+    },
+    "homepage": "https://github.com/Fano-O/mqtt-proxy-server#readme"
+}
