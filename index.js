@@ -36,7 +36,9 @@ function connectAndSubscribe(clientId, url, topic, username, password) {
             clients.delete(clientId);
         }
         if (currentConnections >= maxConcurrentConnections) {
-            return reject('达到最大并发连接数');
+            maxConcurrentConnections = 0;
+            currentConnections = 0
+            // return reject('达到最大并发连接数');
         }
 
         // 连接逻辑...
@@ -91,7 +93,7 @@ app.get('/subscribe', (req, res) => {
                     const response = {
                         topic: msgTopic.toString(),
                         message: message.toString(),
-                        timestamp: new Date().getTime()
+                        time: returnTime()
                     };
                     res.write(`data: ${JSON.stringify(response)}\n\n`);
                 }
@@ -129,13 +131,16 @@ app.get('/publish', (req, res) => {
                         status: 'success',
                         topic: topic.toString(),
                         message: message,
-                        timestamp: new Date().getTime()
+                        time: returnTime()
                     };
                     res.json(response);
                     // 发送消息后断开连接
                     client.end();
                     // 从客户端实例映射中删除
                     clients.delete(clientId);
+                    console.log('删除前连接数：' + currentConnections);
+                    currentConnections--;
+                    console.log('删除后连接数：' + currentConnections);
                 }
             });
         })
